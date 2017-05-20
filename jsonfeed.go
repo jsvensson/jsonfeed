@@ -1,4 +1,4 @@
-// JsonFeed package implements JSON Feed, https://jsonfeed.org/.
+// Package jsonfeed is a basic implementation of the JSON Feed specification, https://jsonfeed.org/.
 package jsonfeed
 
 import (
@@ -25,22 +25,25 @@ type Feed struct {
 	Items       []Item  `json:"items"`
 }
 
+// Item describes an entry in a JSON feed.
 type Item struct {
-	ID            string    `json:"id"`
-	URL           string    `json:"url,omitempty"`
-	ExternalURL   string    `json:"external_url,omitempty"`
-	Title         string    `json:"title,omitempty"`
-	ContentHTML   string    `json:"content_html,omitempty"`
-	ContentText   string    `json:"content_text,omitempty"`
-	Summary       string    `json:"summary,omitempty"`
-	Image         string    `json:"image,omitempty"`
-	BannerImage   string    `json:"banner_image,omitempty"`
-	DatePublished time.Time `json:"date_published,omitempty"`
-	DateModified  time.Time `json:"date_modified,omitempty"`
-	Author        *Author   `json:"author,omitempty"`
-	Tags          []string  `json:"tags,omitempty"`
+	ID            string       `json:"id"`
+	URL           string       `json:"url,omitempty"`
+	ExternalURL   string       `json:"external_url,omitempty"`
+	Title         string       `json:"title,omitempty"`
+	ContentHTML   string       `json:"content_html,omitempty"`
+	ContentText   string       `json:"content_text,omitempty"`
+	Summary       string       `json:"summary,omitempty"`
+	Image         string       `json:"image,omitempty"`
+	BannerImage   string       `json:"banner_image,omitempty"`
+	DatePublished time.Time    `json:"date_published,omitempty"`
+	DateModified  time.Time    `json:"date_modified,omitempty"`
+	Author        *Author      `json:"author,omitempty"`
+	Tags          []string     `json:"tags,omitempty"`
+	Attachments   []Attachment `json:"attachments,omitempty"`
 }
 
+// Attachment is an optional attachment to an Item.
 type Attachment struct {
 	URL      string `json:"url"`
 	MimeType string `json:"mime_type"`
@@ -49,17 +52,21 @@ type Attachment struct {
 	Duration int    `json:"duration,omitempty"`
 }
 
+// Author is the author of a JSON feed, or an individual item in a JSON feed.
 type Author struct {
 	Name   string `json:"name,omitempty"`
 	URL    string `json:"url,omitempty"`
 	Avatar string `json:"avatar,omitempty"`
 }
 
+// Hub describes an endpoint that can be used to subscribe to real-time notifications from the publisher of this feed.
+// See the official specification for more information.
 type Hub struct {
 	Type string `json:"type"`
 	URL  string `json:"url"`
 }
 
+// Parse accepts a raw JSON Feed via a reader and parses it into a Feed struct.
 func Parse(reader io.Reader) (Feed, error) {
 	var feed Feed
 	err := json.NewDecoder(reader).Decode(&feed)
