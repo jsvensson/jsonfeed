@@ -10,19 +10,19 @@ import (
 // Feed is a JSON Feed containing the relevant feed information and a list of items.
 // Struct fields with the "omitempty" JSON property are not required for the format.
 type Feed struct {
-	Version     string  `json:"version"`
-	Title       string  `json:"title"`
-	HomePageURL string  `json:"home_page_url,omitempty"`
-	FeedURL     string  `json:"feed_url,omitempty"`
-	Description string  `json:"description,omitempty"`
-	UserComment string  `json:"user_comment,omitempty"`
-	NextURL     string  `json:"next_url,omitempty"`
-	Icon        string  `json:"icon,omitempty"`
-	FavIcon     string  `json:"favicon,omitempty"`
-	Author      *Author `json:"author,omitempty"`
-	Expired     bool    `json:"expired,omitempty"`
-	Hubs        []Hub   `json:"hubs,omitempty"`
-	Items       []Item  `json:"items"`
+	Version     string `json:"version"`
+	Title       string `json:"title"`
+	HomePageURL string `json:"home_page_url,omitempty"`
+	FeedURL     string `json:"feed_url,omitempty"`
+	Description string `json:"description,omitempty"`
+	UserComment string `json:"user_comment,omitempty"`
+	NextURL     string `json:"next_url,omitempty"`
+	Icon        string `json:"icon,omitempty"`
+	FavIcon     string `json:"favicon,omitempty"`
+	Author      Author `json:"author,omitempty"`
+	Expired     bool   `json:"expired,omitempty"`
+	Hubs        []Hub  `json:"hubs,omitempty"`
+	Items       []Item `json:"items"`
 }
 
 // Item describes an entry in a JSON feed.
@@ -38,7 +38,7 @@ type Item struct {
 	BannerImage   string       `json:"banner_image,omitempty"`
 	DatePublished time.Time    `json:"date_published,omitempty"`
 	DateModified  time.Time    `json:"date_modified,omitempty"`
-	Author        *Author      `json:"author,omitempty"`
+	Author        Author       `json:"author,omitempty"`
 	Tags          []string     `json:"tags,omitempty"`
 	Attachments   []Attachment `json:"attachments,omitempty"`
 }
