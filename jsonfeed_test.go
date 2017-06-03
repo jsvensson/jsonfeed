@@ -1,9 +1,8 @@
 package jsonfeed_test
 
 import (
-	"testing"
-
 	"os"
+	"testing"
 
 	"github.com/jsvensson/jsonfeed"
 	"github.com/stretchr/testify/assert"
